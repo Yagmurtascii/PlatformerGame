@@ -44,6 +44,7 @@ namespace Platform
 
         void Start()
         {
+            Time.timeScale = 1f;
             coin = PlayerPrefs.GetInt("coin"); //Take the saved coin value
             uIManager.CoinUI(coin); //Send the coin value to coinText;
             rb = GetComponent<Rigidbody2D>();
@@ -76,7 +77,7 @@ namespace Platform
             }
 
             //Jump Controller
-            if (Input.GetKey(KeyCode.Space) && isGrounded == true)
+            if (Input.GetKey(KeyCode.W) && isGrounded == true || Input.GetKey(KeyCode.UpArrow) && isGrounded == true)
             {
                 rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 animator.SetBool("isWalking", false);

@@ -14,6 +14,14 @@ namespace Platform
         [Header("Bool Expression")]
         public bool isGameOver = false;
 
+        [Header("Game Over Pane")]
+        public GameObject pane;
+
+        private void Start()
+        {
+            Time.timeScale = 1f;
+        }
+
         void Update()
         {
             float vertical = Input.GetAxis("Vertical");
@@ -25,7 +33,11 @@ namespace Platform
         {
             health -= damage;
             if (health <= 0)
+            {
                 Destroy(this.gameObject);
+                pane.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -38,6 +50,8 @@ namespace Platform
             {
                 isGameOver = true;
                 health -= 10;
+                pane.SetActive(true);
+                Time.timeScale = 0f;
             }
             else
                 isGameOver = false;
